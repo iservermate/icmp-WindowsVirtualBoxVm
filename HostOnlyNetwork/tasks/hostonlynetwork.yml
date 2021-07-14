@@ -1,0 +1,18 @@
+---
+#  - name: "List host-only-network"
+#    shell: VBoxManage list hostonlyifs
+#    register: output
+
+  - name: "Create host-only-network"
+    shell: VBoxManage hostonlyif create
+
+  - name: "Set Subnet for host-only-network"
+    shell: VBoxManage hostonlyif ipconfig "{{ netname }}" --ip "{{ ip }}"
+    register: output
+  - debug:
+      msg:
+        - var: "{{ output }}"
+
+  - name: "Configure DHCP Server"
+    shell: VBoxManage dhcpserver add --ifname {{ netname }} --ip {{ ip }} --netmask {{ netmask }} --lowerip {{ lowerip }} --upperip {{ upperip }} --enable
+    ignore_errors: yes

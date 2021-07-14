@@ -1,0 +1,27 @@
+---
+  - name: "Configgure Host only network on VirtualBox"
+    hosts: local
+    gather_facts: on
+    vars_prompt:
+      - name: HONName
+        prompt: "Enter hsot-only-network name: "
+        private: no
+        default: vboxnet0
+      - name: HONip
+        prompt: "Enter hsot-only-network ip: "
+        private: no
+        default: 10.0.0.1
+      - name: HONnetmask
+        prompt: "Enter hsot-only-network netmask: "
+        private: no
+        default: 255.255.255.0
+      - name: HONlowerip
+        prompt: "Enter hsot-only-network lowwer ip: "
+        private: no
+        default: 10.0.0.2
+      - name: HONupperip
+        prompt: "Enter hsot-only-network upper ip: "
+        private: no
+        default: 10.0.0.100
+    roles:
+      - HostOnlyNetwork

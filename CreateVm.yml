@@ -1,0 +1,5 @@
+---
+#  - import_playbook: HostOnlyNetwork.yml
+  - import_playbook: VBoxVm.yml
+    tags:
+      - CreateVM

@@ -1,0 +1,104 @@
+---
+#  - debug:
+#      msg: {{ hostvars[inventory_hostname]['ansible_interfaces']|last }}"
+
+  - name: "Create Hard Disk and attached to VBox"
+    shell: VBoxManage.exe createhd  --filename {{ homedir }}/{{ myvm }}/{{ myvm }}{{ vmext }} --size {{ hdsize }} --variant {{ variant }}
+    register: output
+  - debug:
+      msg:
+        - "HD created with the name of {{ myvm }}{{ vmext}}"
+
+  - name: "Register a VM on VBox"
+    shell: VBoxManage.exe createvm --name {{ myvm }} --ostype {{ osType }} --register
+    register: output
+  - debug:
+      msg:
+        - "Registered {{ output }}"
+
+  - name: "Assign CPU, RAM, VRAM"
+    shell: VBoxManage.exe modifyvm {{ myvm }} --cpus {{ cpus }} --memory {{ ram }} --vram {{ vram }}
+    register: output
+  - debug:
+      msg:
+        - "Assiged values are are {{ output }}"
+
+  - name: "Assign host-only-network to nicX "
+    #shell: VBoxManage.exe modifyvm {{ myvm }} --nic1 bridged --bridgeadapter1 {{ myvm }}eth0
+    shell: VBoxManage.exe modifyvm {{ myvm }} --nic1 bridged --bridgeadapter1 "Intel(R) 82579V Gigabit Network Connection"
+#    #shell: VBoxManage.exe modifyvm {{ myvm }} --nic1 hostonly --hostonlyadapter1 "{{ hostvars[inventory_hostname]['ansible_interfaces']|last }}"
+#    shell: VBoxManage.exe modifyvm {{ myvm }} --bridgeadapter1 none --nic1 bridged
+    #shell: VBoxManage.exe modifyvm {{ myvm }}  --nic1 bridged --nictype1 82545EM --bridgeadapter1 br1
+    register: output
+  - debug:
+      msg:
+        - "Storage controller added {{ output }}"
+
+  - name: "Add Storage Controller with HD "
+    shell: VBoxManage.exe storagectl {{ myvm }} --name "SATA" --add sata --controller IntelAHCI --portcount 1
+    register: output
+  - debug:
+      msg:
+        - "Storage controller added {{ output }}"
+
+  - name: "Attach HD to storage controller "
+    shell: VBoxManage.exe storageattach {{ myvm }} --storagectl "SATA" --port {{ port }} --device {{ device }} --type hdd  --medium {{ homedir }}/{{ myvm }}/{{ myvm }}{{ vmext }}
+    register: output
+  - debug:
+      msg:
+        - "HD Attached to storage controller {{ output }}"
+
+  - name: "ADD IDE Controler to boot from DVD/ISO image "
+    shell: VBoxManage.exe storagectl {{ myvm }} --name "IDE" --add ide
+    register: output
+  - debug:
+      msg:
+        - "IDE controler attached {{ output }}"
+
+  - name: "Attached RHEL ISO image with IDE controller"
+    shell: VBoxManage.exe storageattach {{ myvm }} --storagectl "IDE" --port {{ RhelPort }} --device {{ RhelDevice }} --type dvddrive --medium {{ RhelImagePath }}
+    register: output
+  - debug:
+      msg:
+        - "ISO image attached {{ output }}"
+
+  - name: "Attached Centos ISO image with IDE controller"
+    shell: VBoxManage.exe storageattach {{ myvm }} --storagectl "IDE" --port {{ CentosPort }} --device {{ CentosDevice }} --type dvddrive --medium {{ CentosImagePath }}
+    register: output
+  - debug:
+      msg:
+        - "ISO image attached {{ output }}"
+
+  - name: "Attached Ubuntu ISO image with IDE controller"
+    shell: VBoxManage.exe storageattach {{ myvm }} --storagectl "IDE" --port {{ UbuntuPort }} --device {{ UbuntuDevice }} --type dvddrive --medium {{ UbuntuImagePath }}
+    register: output
+  - debug:
+      msg:
+        - "ISO image attached {{ output }}"
+
+  - name: "Enable Misc system settings"
+    shell: VBoxManage.exe modifyvm {{ myvm }} --ioapic on
+    register: output
+  - debug:
+      msg:
+        - "System settings enabled {{ output }}"
+
+
+  - name: "Set boot order"
+    shell: VBoxManage.exe modifyvm {{ myvm }} --boot1 disk --boot2 net --boot3 dvd
+    register: output
+  - debug:
+      msg:
+        - "Boot Order {{ output }}"
+
+  - name: "Starting Your new VM"
+    shell: VBoxManage.exe startvm {{ myvm }} --type headless
+  - debug:
+      msg: "{{ myvm }} started. Check on Virtual Box."
+
+#  - name: "Waiting for pro 22 of pxe server"
+#    wait_for:
+#      host: "{{ inventory_hostname }}"
+#      port: 22
+#      delay: 650
+#      state: started
