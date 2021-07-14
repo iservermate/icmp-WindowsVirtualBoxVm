@@ -1,0 +1,5 @@
+---
+# tasks file for HostOnlyNetwork
+   - import_tasks: hostonlynetwork.yml
+     tags:
+       - Set host-only-network

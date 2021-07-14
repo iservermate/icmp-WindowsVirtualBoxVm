@@ -1,0 +1,12 @@
+---
+# defaults file for HostOnlyNetwork
+#netname: vboxnet0 ## This wil be changed  next time you will run this playbook
+netname: "{{ HONName }}"
+#ip: 10.0.0.1
+ip: "{{ HONip }}"
+#netmask: 255.255.255.0
+netmask: "{{ HONnetmask }}"
+#lowerip: 10.0.0.3
+lowerip: "{{ HONlowerip }}"
+#upperip: 10.0.0.50
+upperip: "{{ HONupperip }}"

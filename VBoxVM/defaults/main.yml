@@ -1,0 +1,41 @@
+---
+# defaults file for VBoxVM
+#VboxVmnetname: vboxnet1
+
+#hdsize: 19000
+hdsize: "{{ VboxHDSize }}"
+vmext: .vdi
+#homedir: ~/VirtualBox\ VMs/
+homedir: "{{ VboxHomeDir }}"
+#variant: Standard
+variant: "{{ VboxVariant }}" 
+#OS Types: --ostype RedHat_64 | Ubuntu_64 | Windows2012_64 | Windows7_64
+#osType: RedHat_64
+osType: "{{ VboxOstype }}"
+#cpus: 1
+cpus: "{{ VboxCpu }}"
+#ram: 1024
+ram: "{{ VboxRam }}"
+vram: 12
+#To attach HD TO controller
+port: 0
+device: 0
+#Rhel ISO image mount port
+RhelPort: 0
+RhelDevice: 0
+
+#Centos ISO image mount port
+CentosPort: 0
+CentosDevice: 1
+
+#ubuntu ISO image mount port
+UbuntuPort: 1
+UbuntuDevice: 0
+
+#iso images path
+#CentosImagePath: ~/VirtualBox\ VMs/isos/CentOS-7.iso
+#RhelImagePath: ~/VirtualBox\ VMs/isos/rhel-server7.iso
+#UbuntuImagePath: ~/VirtualBox\ VMs/isos/ubuntu-18.04.3-desktop.iso
+RhelImagePath: "{{ VboxRhel }}"
+CentosImagePath: "{{ VboxCentos }}"
+UbuntuImagePath: "{{ VboxUbuntu }}"

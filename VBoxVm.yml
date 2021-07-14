@@ -1,0 +1,49 @@
+---
+  - name: "Create and register a VM on Virtual Box"
+    hosts: localhost
+    gather_facts: on
+    become: no
+    vars_prompt:
+      - name: myvm
+        prompt: "Enter vm name: "
+        private: no
+      - name: VboxHDSize
+        prompt: "Enter disk size "
+        private: no
+        default: 17000
+      - name: VboxHomeDir
+        prompt: "Enter vm home directory: "
+        private: no
+        #default: ~/VirtualBox\ VMs/
+        default: C:/Users/admin/VirtualBoxVMs/
+        #default: /mnt/c/Users/admin/VirtualBoxVMs/
+      - name: VboxVariant
+        prompt: "Enter HD type/variant {Standard, Fixed}: "
+        private: no
+        default: Standard
+      - name: VboxOstype
+        prompt: "Enter vm OS type {RedHat_64, Ubuntu_64, Windows2012_64, Windows7_64}: "
+        private: no
+        default: RedHat_64
+      - name: VboxCpu
+        prompt: "Enter number of CPUs: "
+        private: no
+        default: 1
+      - name: VboxRam
+        prompt: "Enter size of RAM:  "
+        private: no
+        default: 2048
+      - name: VboxRhel
+        prompt: "Enter RHEL image path: "
+        private: no
+        default: C:/Users/admin/VirtualBoxVMs/OS/rhel.iso
+      - name: VboxCentos
+        prompt: "Enter CentOS image path: "
+        private: no
+        default: C:/Users/admin/VirtualBoxVMs/OS/centos.iso
+      - name: VboxUbuntu
+        prompt: "Enter Ubuntu image path: "
+        private: no
+        default: C:/Users/admin/VirtualBoxVMs/OS/ubuntu.iso
+    roles:
+      - VBoxVM
