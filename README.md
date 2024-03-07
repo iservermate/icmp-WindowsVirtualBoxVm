@@ -1,10 +1,10 @@
 **Install anc configure virtual machine on Virtualbox instaled on windwos.**
 
 **Playbook:**<br>
-    - CreateVM.yml
+    - CreateVM.yml<br>
 **Plays:**<br>
-    - HostOnlyNetwork.yml
-    - VBoxVm.yml
+    - HostOnlyNetwork.yml<br>
+    - VBoxVm.yml<br>
 
 **COMMANDS:**<br>
   
