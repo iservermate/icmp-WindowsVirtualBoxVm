@@ -1,4 +1,4 @@
-**Install anc configure virtual machine on Virtualbox instaled on windwos. **
+**Install anc configure virtual machine on Virtualbox instaled on windwos.**
 
 **Playbook:**
     - CreateVM.yml
