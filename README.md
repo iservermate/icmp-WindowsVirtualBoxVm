@@ -1,12 +1,12 @@
 **Install anc configure virtual machine on Virtualbox instaled on windwos.**
 
-**Playbook:**
+**Playbook:**<br>
     - CreateVM.yml
-**Plays:**
+**Plays:**:**<br>
     - HostOnlyNetwork.yml
     - VBoxVm.yml
 
-**COMMANDS:**
+**COMMANDS:**:**<br>
   
 **VBox VM:**
     - ansible-playbook -i ../inventory/hosts VBoxVm.yml -l 'local'
