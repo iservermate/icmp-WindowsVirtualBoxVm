@@ -2,7 +2,7 @@
 
 **Playbook:**<br>
     - CreateVM.yml
-**Plays:**:**<br>
+**Plays:**<br>
     - HostOnlyNetwork.yml
     - VBoxVm.yml
 
