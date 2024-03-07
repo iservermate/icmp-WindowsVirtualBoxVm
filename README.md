@@ -7,10 +7,11 @@
     - HostOnlyNetwork.yml
     - VBoxVm.yml
     
-COMMANDS:
+> COMMANDS:
   
-  VBox VM:                    ansible-playbook -i ../inventory/hosts VBoxVm.yml -l 'local'
-  
-  VBox "host-only-network":   ansible-playbook -i ../inventory/hosts HostOnlyNetwork.yml -l 'local
-  
-  Both VBox "host-only-network" + "VBox VM":  ansible-playbook -i ../inventory/hosts CreateVm.yml -l 'local
+>> VBox VM:
+      - ansible-playbook -i ../inventory/hosts VBoxVm.yml -l 'local'
+>> VBox "host-only-network":
+      - ansible-playbook -i ../inventory/hosts HostOnlyNetwork.yml -l 'local
+>> Both VBox "host-only-network" + "VBox VM":
+      - ansible-playbook -i ../inventory/hosts CreateVm.yml -l 'local
