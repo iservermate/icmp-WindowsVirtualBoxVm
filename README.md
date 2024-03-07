@@ -9,9 +9,9 @@
     
 > COMMANDS:
   
-> VBox VM:
+ VBox VM:
       - ansible-playbook -i ../inventory/hosts VBoxVm.yml -l 'local'
-> VBox "host-only-network":
+ VBox "host-only-network":
       - ansible-playbook -i ../inventory/hosts HostOnlyNetwork.yml -l 'local
-> Both VBox "host-only-network" + "VBox VM":
+ Both VBox "host-only-network" + "VBox VM":
       - ansible-playbook -i ../inventory/hosts CreateVm.yml -l 'local
