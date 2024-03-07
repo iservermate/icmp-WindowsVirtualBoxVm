@@ -6,7 +6,7 @@
     - HostOnlyNetwork.yml
     - VBoxVm.yml
 
-**COMMANDS:**:**<br>
+**COMMANDS:**<br>
   
 **VBox VM:**
     - ansible-playbook -i ../inventory/hosts VBoxVm.yml -l 'local'
